@@ -35,138 +35,105 @@ const promptUser = () => {
       message: 'What is their office number?',
     }]
   )
-  .then((response) => {
-    const manager1 = new Manager(response.id, response.name, response.email, response.officeNumber);
-    teamList.push(manager1);
-    console.log(manager1);
-    mainMenu();
-  },
-  )
-
-
-promptUser();
-
-
-// //------------------------------------------------------------------------------------
-
-
-function mainMenu(){
-const promptU = () => {
-  return inquirer.prompt([
-    {
-      type: 'list',
-      name: 'options',
-      message: 'What action would you like to take?',
-      choices: [
-        "ADD AN EMPLOYEE",
-        "ADD AN ENGINEER",
-        "ADD AN INTERN",
-        "ADD A MANGER",
-      ],
-    },
-  ])
-
-    //MENU TREE
-
     .then((response) => {
-      switch (response.options) {
-        case "ADD AN EMPLOYEE":
-          addEmployee();
-          break;
-        case "ADD AN ENGINEER":
-          addEngineer();
-          break;
-        case "ADD AN INTERN":
-          addIntern();
-          break;
-      }
-    })
+      const manager1 = new Manager(response.id, response.name, response.email, response.officeNumber);
+      teamList.push(manager1);
+      console.log(manager1);
+      mainMenu();
+    },
+    )
+
+  promptUser();
+
+
+
+
+  // //------------------------------------------------------------------------------------
+
+
+  function mainMenu() {
+    const promptU = () => {
+      return inquirer.prompt([
+        {
+          type: 'list',
+          name: 'options',
+          message: 'What action would you like to take?',
+          choices: [
+            "ADD AN EMPLOYEE",
+            "ADD AN ENGINEER",
+            "ADD AN INTERN",
+            "ADD A MANGER",
+          ],
+        },
+      ])
+
+        //MENU TREE
+
+        .then((response) => {
+          switch (response.options) {
+            case "ADD AN ENGINEER":
+              addEngineer();
+              break;
+            case "ADD AN INTERN":
+              addIntern();
+              break;
+          }
+        })
+
+    }
     promptU();
-}
-}
-
-
-//CALLING THE FUNCTION
-
-
-
-
-//ADD EMPLOYEE
-function addEmployee() {
-  console.log("Employee added successfully!")
-
-  const promptUser = () => {
-    return inquirer.prompt([
-      {
-        type: 'input',
-        name: 'firstName',
-        message: 'What is their full name?',
-      },
-      {
-        type: 'input',
-        name: 'idNumber',
-        message: 'What is their ID number',
-      },
-      {
-        type: 'input',
-        name: 'email',
-        message: 'What is their contact email?',
-      }])
   }
-  promptUser();
-}
 
+  //ADD ENGINEER
+  function addEngineer() {
+    console.log("Employee added successfully!")
 
-//ADD ENGINEER
-function addEngineer() {
-  console.log("Employee added successfully!")
-
-  const promptUser = () => {
-    return inquirer.prompt([
-      {
-        type: 'input',
-        name: 'firstName',
-        message: 'What is their full name?',
-      },
-      {
-        type: 'input',
-        name: 'idNumber',
-        message: 'What is their ID number',
-      },
-      {
-        type: 'input',
-        name: 'email',
-        message: 'What is their contact email?',
-      }])
+    const promptUser = () => {
+      return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'firstName',
+          message: 'What is their full name?',
+        },
+        {
+          type: 'input',
+          name: 'idNumber',
+          message: 'What is their ID number',
+        },
+        {
+          type: 'input',
+          name: 'email',
+          message: 'What is their contact email?',
+        }])
+    }
+    promptUser();
   }
-  promptUser();
-}
 
 
-//ADD INTERN
-function addIntern() {
-  console.log("Employee added successfully!")
+  //ADD INTERN
+  function addIntern() {
+    console.log("Employee added successfully!")
 
-  const promptUser = () => {
-    return inquirer.prompt([
-      {
-        type: 'input',
-        name: 'firstName',
-        message: 'What is their full name?',
-      },
-      {
-        type: 'input',
-        name: 'idNumber',
-        message: 'What is their ID number',
-      },
-      {
-        type: 'input',
-        name: 'email',
-        message: 'What is their contact email?',
-      }])
+    const promptUser = () => {
+      return inquirer.prompt([
+        {
+          type: 'input',
+          name: 'firstName',
+          message: 'What is their full name?',
+        },
+        {
+          type: 'input',
+          name: 'idNumber',
+          message: 'What is their ID number',
+        },
+        {
+          type: 'input',
+          name: 'email',
+          message: 'What is their contact email?',
+        }])
+    }
+    promptUser();
   }
-  promptUser();
-}
 }
 
 
@@ -175,8 +142,8 @@ function addIntern() {
 
 
 
-// const employee = new Employee("name", "employeeID", "email", "officeNumber"), ;
-//--------------------------------------------------
+// const employee = new employee("name", "employeeID", "email", "officeNumber");
+// --------------------------------------------------
 
 const generateHTML = (answers) =>
   `
@@ -193,7 +160,7 @@ const generateHTML = (answers) =>
   <body>
       <div class="jumbotron jumbotron-fluid">
           <div class="container">
-              <h1 class="display-4">Hi! My name is ${answers.name}</h1>
+              <h1 class="display-4">Hi! My name is ${answers.employee}</h1>
               <p class="lead">I am from ${answers.location}.</p>
               <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
           </div>
@@ -251,7 +218,7 @@ const generateHTML = (answers) =>
   </body>
   
   </html>`;
-  
+
 
 
 
