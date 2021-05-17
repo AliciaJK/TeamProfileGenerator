@@ -20,7 +20,9 @@ If you have any questions, please do not hesitate to reach out at alicia.krolak4
 You can find me on GitHub as aliciajk. 
 
 # Screenshots
+![image](https://user-images.githubusercontent.com/78323646/118429498-d4bacf80-b69f-11eb-9652-db44ba6965ed.png)
 
+![image](https://user-images.githubusercontent.com/78323646/118429520-e0a69180-b69f-11eb-9495-8aee07acdbe6.png)
 
 
 ## User Story
