@@ -1,4 +1,3 @@
-
 const inquirer = require('inquirer');
 const fs = require('fs');
 const util = require('util');
@@ -11,7 +10,6 @@ const teamList = [];
 const writeFileAsync = util.promisify(fs.writeFile);
 
 //ADD MANAGER
-
 const promptUser = () => {
   return inquirer.prompt([
     {
@@ -39,17 +37,15 @@ const promptUser = () => {
       const manager1 = new Manager(response.id, response.name, response.email, response.officeNumber);
       teamList.push(manager1);
       console.log(manager1);
+      console.log(teamList)
+      startHTML();
+      generateManagerCard();
       mainMenu();
     },
     )
-
+  }
   promptUser();
-
-
-
-
-  // //------------------------------------------------------------------------------------
-
+ //------------------------------------------------------------------------------------
 
   function mainMenu() {
     const promptU = () => {
@@ -59,10 +55,9 @@ const promptUser = () => {
           name: 'options',
           message: 'What action would you like to take?',
           choices: [
-            "ADD AN EMPLOYEE",
-            "ADD AN ENGINEER",
             "ADD AN INTERN",
-            "ADD A MANGER",
+            "ADD AN ENGINEER",
+            "EXIT AND PRINT PAGE"
           ],
         },
       ])
@@ -76,6 +71,9 @@ const promptUser = () => {
               break;
             case "ADD AN INTERN":
               addIntern();
+              break;
+            case "EXIT AND PRINT PAGE":
+              endHTML();
               break;
           }
         })
@@ -104,7 +102,23 @@ const promptUser = () => {
           type: 'input',
           name: 'email',
           message: 'What is their contact email?',
+        },
+        {
+          type: 'input',
+          name: 'gitHub',
+          message: 'What is their GitHub username?',
         }])
+
+        // promptUser();
+        .then((response) => {
+          const engineer1 = new Engineer(response.id, response.name, response.email, response.gitHub);
+          teamList.push(engineer1);
+          console.log(engineer1);
+          generateEngineerCard(engineer1)
+          mainMenu();
+        },
+        )
+
     }
     promptUser();
   }
@@ -130,22 +144,35 @@ const promptUser = () => {
           type: 'input',
           name: 'email',
           message: 'What is their contact email?',
-        }])
+        },
+        {
+          type: 'input',
+          name: 'school',
+          message: 'What school are they attending?',
+        }
+      ])
+        .then((response) => {
+          const intern1 = new Intern(response.id, response.name, response.email, response.school);
+          teamList.push(intern1);
+          console.log(intern1);
+          generateInternCard();
+          mainMenu();
+
+        },
+        )
+
     }
     promptUser();
   }
-}
-
-
-
-
-
 
 
 // const employee = new employee("name", "employeeID", "email", "officeNumber");
 // --------------------------------------------------
+function startHTML(employee) {
+// console.log(teamList)
 
-const generateHTML = (answers) =>
+ const generatingHTML = 
+
   `
   <!DOCTYPE html>
   <html lang="en">
@@ -160,73 +187,95 @@ const generateHTML = (answers) =>
   <body>
       <div class="jumbotron jumbotron-fluid">
           <div class="container">
-              <h1 class="display-4">Hi! My name is ${answers.employee}</h1>
-              <p class="lead">I am from ${answers.location}.</p>
-              <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
-          </div>
-         
-      </div>
-      <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-          
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-  
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-  
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-  
-        </div>
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a>
-          </div>
-        </div>
-  </body>
-  
-  </html>`;
+              // <h1 class="display-4">Team Profile Generator</h1>
 
+          </div>`;
+
+fs.writeFile(".index.html", generatingHTML, function (err) {
+  if (err) {
+    console.log(err);
+  }
+
+}
+)}
+
+
+function generateInternCard(intern1) {
+
+    const generatingHTML=
+    `<div class="card" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title">Intern: </h5>
+        <h6 class="card-subtitle mb-2 text-muted">${intern1.getName}</h6>
+        <p class="card-text">${intern1.getID}</p>
+        <a href="${intern1.getEmail}" class="card-link">${intern1.getEmail}</a>
+        <a class="card-link">${intern1.getSchool}</a>
+      </div>
+      }`
+    fs.appendFile(".index.html", generatingHTML, function (err) {
+      if (err) {
+        console.log(err);
+      }
+    },
+    )}
+
+      function generateManagerCard(manager1) {
+
+        const generatingHTML=
+        `<div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">Manager: </h5>
+          <h6 class="card-subtitle mb-2 text-muted">${manager1.getName}</h6>
+          <p class="card-text">${manager1.getID}</p>
+          <a href="${manager1.getEmail}" class="card-link">${manager1.getEmail}</a>
+          <a class="card-link">${manager1.getSchool}</a>
+        </div>
+        }`
+        fs.appendFile(".index.html", generatingHTML, function (err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+      }
+
+
+          function generateInternCard(engineer1) {
+
+            const generatingHTML=
+          
+            `<div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Engineer: </h5>
+            <h6 class="card-subtitle mb-2 text-muted">${engineer1.getName}</h6>
+            <p class="card-text">${engineer1.getID}</p>
+            <a href="${engineer1.getEmail}" class="card-link">${engineer1.getEmail}</a>
+            <a class="card-link">${engineer1.getSchool}</a>
+          </div>
+          }`
+            fs.appendFile(".index.html", generatingHTML, function (err) {
+              if (err) {
+                console.log(err);
+              }
+            })
+            
+          }
+
+        
+function endHTML(){
+
+
+  `</body>
+
+  </html>`;
+};
 
 
 
 const init = () => {
-  promptUser()
-    .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
-    .then(() => console.log('Successfully wrote to index.html'))
-    .catch((err) => console.error(err));
-};
+          promptUser()
+            .then((answers) => writeFileAsync('index.html', generateHTML(answers)))
+            .then(() => console.log('Successfully wrote to index.html'))
+            .catch((err) => console.error(err));
+        };
 
-init();
+        init();
