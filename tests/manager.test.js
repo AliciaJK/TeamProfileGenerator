@@ -9,13 +9,6 @@ describe("Manager", () => {
       expect(empl.email).toEqual("testname@email.com");
       expect(empl.officeNumber).toEqual(4);
     });
-    
-    it("should throw an error if provided no arguments", () => {
-        // Wrap the object initialization in a callback function that Jest will run
-        const empl = () => new Manager();
-        // Verify that an error was thrown in the callback function
-        expect(empl).toThrow();
-      });
   });
 
 
@@ -43,7 +36,7 @@ describe("Manager", () => {
       expect(empl.getId()).toEqual(1);
     });
   });
-  describe("getEmail", () => {
+  describe("getOfficeNumber", () => {
     it("should return the email of employee", () => {
       // Create new objects to test with
       const empl = new Manager(1,"Testname", "testname@email.com",5);
