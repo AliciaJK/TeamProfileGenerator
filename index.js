@@ -193,7 +193,7 @@ function generateInternCard(intern1) {
         <h5 class="card-title">Intern: </h5>
         <h6 class="card-subtitle mb-2 text-muted">${intern1.getName()}</h6>
         <p class="card-text">${intern1.getId()}</p>
-        <a href="${intern1.getEmail()}" class="card-link">${intern1.getEmail()}</a>
+        <a href="mailto:${intern1.getEmail()}" class="card-link">${intern1.getEmail()}</a>
         <a class="card-link">${intern1.getSchool()}</a>
       </div>
       }`
@@ -215,7 +215,7 @@ function generateManagerCard(manager1) {
           <h5 class="card-title">Manager: </h5>
           <h6 class="card-subtitle mb-2 text-muted">${manager1.getName()}</h6>
           <p class="card-text">${manager1.getId()}</p>
-          <a href="${manager1.getEmail()}" class="card-link">${manager1.getEmail()}</a>
+          <a href="mailto:${manager1.getEmail()}" class="card-link">${manager1.getEmail()}</a>
           <a class="card-link">${manager1.getSchool()}</a>
         </div>
         }`
@@ -238,7 +238,7 @@ function generateEngineerCard(engineer1) {
             <h5 class="card-title">Engineer: </h5>
             <h6 class="card-subtitle mb-2 text-muted">${engineer1.getName()}</h6>
             <p class="card-text">${engineer1.getId()}</p>
-            <a href="${engineer1.getEmail()}" class="card-link">${engineer1.getEmail()}</a>
+            <a href="mailto:${engineer1.getEmail()}" class="card-link">${engineer1.getEmail()}</a>
             <a href="https://github.com/${engineer1.getGitHub()}" class ="card-link">${engineer1.getGitHub()}</a>
           </div>
           }`
