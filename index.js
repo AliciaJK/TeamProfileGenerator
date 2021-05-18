@@ -4,6 +4,7 @@ const util = require('util');
 const Manager = require('./lib/manager');
 const Intern = require('./lib/intern');
 const Engineer = require('./lib/engineer');
+const { Console } = require('console');
 const teamList = [];
 
 // create writeFile function using promises instead of a callback function
@@ -37,8 +38,8 @@ const addManager = () => {
     .then((response) => {
       const manager1 = new Manager(response.id, response.name, response.email, response.officeNumber);
       teamList.push(manager1);
-      console.log(manager1);
-      console.log(teamList)
+      // console.log(manager1);
+      // console.log(teamList)
       startHTML();
       generateManagerCard(manager1);
       mainMenu();
@@ -112,7 +113,7 @@ function addEngineer() {
       .then((response) => {
         const engineer1 = new Engineer(response.id, response.name, response.email, response.gitHub);
         teamList.push(engineer1);
-        console.log(engineer1);
+        // console.log(engineer1);
         generateEngineerCard(engineer1)
         console.log("Engineer added successfully!")
         mainMenu();
@@ -151,7 +152,7 @@ function addIntern() {
     .then((response) => {
       const intern1 = new Intern(response.id, response.name, response.email, response.school);
       teamList.push(intern1);
-      console.log(intern1);
+      // console.log(intern1);
       console.log("Intern added successfully!")
       generateInternCard(intern1);
       mainMenu();
@@ -216,9 +217,8 @@ function generateManagerCard(manager1) {
           <h6 class="card-subtitle mb-2 text-muted">${manager1.getName()}</h6>
           <p class="card-text">${manager1.getId()}</p>
           <a href="mailto:${manager1.getEmail()}" class="card-link">${manager1.getEmail()}</a>
-          <a class="card-link">${manager1.getSchool()}</a>
-        </div>
-        }`
+          <a class="card-link">${manager1.getOfficeNumber()}</a>
+        </div>`
 
   fs.appendFile("index.html", generatingHTML, function (err) {
     if (err) {
@@ -239,9 +239,8 @@ function generateEngineerCard(engineer1) {
             <h6 class="card-subtitle mb-2 text-muted">${engineer1.getName()}</h6>
             <p class="card-text">${engineer1.getId()}</p>
             <a href="mailto:${engineer1.getEmail()}" class="card-link">${engineer1.getEmail()}</a>
-            <a href="https://github.com/${engineer1.getGitHub()}" class ="card-link">${engineer1.getGitHub()}</a>
-          </div>
-          }`
+            <a href="https://github.com/${engineer1.getGitHub()}/" class ="card-link">${engineer1.getGitHub()}</a>
+          </div>`
 
   fs.appendFile("index.html", generatingHTML, function (err) {
     if (err) {
@@ -254,12 +253,21 @@ function generateEngineerCard(engineer1) {
 
 //-----------------------------------------------------------------------------
 function endHTML() {
-
+// console.log("Successfully printed HTML!");
+  const generatingHTML =
 
   `</body>
 
-  </html>`;
-};
+  </html>`
+
+  fs.appendFile("index.html", generatingHTML, function (err) {
+    if (err) {
+      console.log(err);
+    }
+    return generatingHTML
+  })
+
+}
 
 
 //-----------------------------------------------------------------------------
