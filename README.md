@@ -1,6 +1,8 @@
 # TeamProfileGenerator
 
 # 10 Object-Oriented Programming: Team Profile Generator
+# Video run through
+https://drive.google.com/file/d/1uyaA8ULM0ZpDGm1J1tqPPVGFqoyl-whA/view
 
 ## The Task
 
