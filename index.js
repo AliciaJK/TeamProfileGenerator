@@ -91,12 +91,12 @@ function addEngineer() {
     return inquirer.prompt([
       {
         type: 'input',
-        name: 'firstName',
+        name: 'name',
         message: 'What is their full name?',
       },
       {
         type: 'input',
-        name: 'idNumber',
+        name: 'id',
         message: 'What is their ID number',
       },
       {
@@ -130,12 +130,12 @@ function addIntern() {
   return inquirer.prompt([
     {
       type: 'input',
-      name: 'firstName',
+      name: 'name',
       message: 'What is their full name?',
     },
     {
       type: 'input',
-      name: 'idNumber',
+      name: 'id',
       message: 'What is their ID number',
     },
     {
@@ -192,9 +192,15 @@ function startHTML(manager1) {
           <p class="card-text">${manager1.getId()}</p>
           <a href="mailto:${manager1.getEmail()}" class="card-link">${manager1.getEmail()}</a>
           <a class="card-link">${manager1.getOfficeNumber()}</a>
-        </div>`;
+        </div>`
 
-  return generatingHTML
+        fs.writeFile("index.html", generatingHTML, function (err) {
+          if (err) {
+            console.log(err);
+          }
+          return generatingHTML
+        })
+
 }
 //-----------------------------------------------------------------------------
 function generateInternCard(intern1) {
@@ -208,7 +214,7 @@ function generateInternCard(intern1) {
         <a href="mailto:${intern1.getEmail()}" class="card-link">${intern1.getEmail()}</a>
         <a class="card-link">${intern1.getSchool()}</a>
       </div>
-      }`
+      `
   fs.appendFile("index.html", generatingHTML, function (err) {
     if (err) {
       console.log(err);
